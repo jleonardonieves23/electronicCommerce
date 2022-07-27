@@ -48,6 +48,8 @@ public class PriceControllerTest {
 		
 		Mockito.when(priceServicePort.addPrice(PRICEDTO)).thenReturn(PRICEDTO);
 		
+		Mockito.when(priceServicePort.updatePrice(PRICEDTO)).thenReturn(PRICEDTO);
+		
 	}
 	
 	@Test
@@ -66,6 +68,12 @@ public class PriceControllerTest {
 	@Test
 	public void savedPriceTEst() {
 		ResponseEntity<PriceDto> delete = priceController.addPrice(PRICEDTO);
+		assertEquals(delete.getBody(), PRICEDTO);
+	}
+	
+	@Test
+	public void updatePriceTEst() {
+		ResponseEntity<PriceDto> delete = priceController.updatePrice(PRICEID, PRICEDTO);
 		assertEquals(delete.getBody(), PRICEDTO);
 	}
 	
