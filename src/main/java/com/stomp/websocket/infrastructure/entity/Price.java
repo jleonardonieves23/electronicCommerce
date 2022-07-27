@@ -45,7 +45,7 @@ public class Price {
 	private int priority;
 
 	@Column(name = "price")
-	private double price;
+	private double amout;
 
 	@Column(name = "curr")
 	private String curr;

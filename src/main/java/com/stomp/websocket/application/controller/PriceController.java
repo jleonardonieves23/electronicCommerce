@@ -3,6 +3,7 @@ package com.stomp.websocket.application.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,29 +27,29 @@ public class PriceController {
 	private PriceServicePort priceServicePort;
 
 	@PostMapping("/add")
-	public ResponseEntity<PriceDto> addPrice(@RequestBody PriceDto priceDto) {
-		return ResponseEntity.ok(priceServicePort.addPrice(priceDto));
+	public ResponseEntity<PriceDto> addPrice(@RequestBody PriceDto priceDto) {		
+		return new ResponseEntity<>(priceServicePort.addPrice(priceDto), HttpStatus.OK);
 	}
 
 	@PutMapping("/update/{id}")
-	public PriceDto updatePrice(@PathVariable Long id, @RequestBody PriceDto priceDto) {
-		return priceServicePort.updatePrice(priceDto);
+	public ResponseEntity<PriceDto>  updatePrice(@PathVariable Long id, @RequestBody PriceDto priceDto) {
+		return new ResponseEntity<>(priceServicePort.updatePrice(priceDto), HttpStatus.OK);
 	}
 
 	@GetMapping("/{id}")
-	public PriceDto getPriceById(@PathVariable Long id) {
-		return priceServicePort.getPriceById(id);
+	public ResponseEntity<PriceDto> getPriceById(@PathVariable Long id) {		
+		return new ResponseEntity<>(priceServicePort.getPriceById(id), HttpStatus.OK);
 	}
 
 	@GetMapping
-	public List<PriceDto> getAllPrices() {
-		return priceServicePort.getPrice();
+	public ResponseEntity<List<PriceDto>> getAllPrices() {
+		return new ResponseEntity<>(priceServicePort.getPrice(), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deletePrice(@PathVariable Long id) {
 		priceServicePort.deletePrice(id);
-		return ResponseEntity.ok("Precio eliminado");		
+		return new ResponseEntity<>("Precio eliminado", HttpStatus.OK);
 	}
 
 }

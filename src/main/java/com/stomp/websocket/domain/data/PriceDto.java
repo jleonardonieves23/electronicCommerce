@@ -37,7 +37,7 @@ public class PriceDto {
 	private int priority; 
 
     @JsonProperty("price") 
-	private double price; 
+	private double amout; 
 
     @JsonProperty("curr") 
 	private String curr;	
