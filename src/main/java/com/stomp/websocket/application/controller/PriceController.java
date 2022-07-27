@@ -28,7 +28,8 @@ public class PriceController {
 
 	@PostMapping("/add")
 	public ResponseEntity<PriceDto> addPrice(@RequestBody PriceDto priceDto) {		
-		return new ResponseEntity<>(priceServicePort.addPrice(priceDto), HttpStatus.OK);
+		PriceDto newPrice = priceServicePort.addPrice(priceDto);
+		return new ResponseEntity<>(newPrice, HttpStatus.OK);
 	}
 
 	@PutMapping("/update/{id}")

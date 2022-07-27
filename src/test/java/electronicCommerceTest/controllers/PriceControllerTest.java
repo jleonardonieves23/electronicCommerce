@@ -22,6 +22,8 @@ public class PriceControllerTest {
 	
 	Long PRICEID = 1L;
 	
+	String DELETE = "Precio eliminado";
+	
 	PriceDto PRICEDTO = new PriceDto();
 
 	@Mock
@@ -44,12 +46,27 @@ public class PriceControllerTest {
 		
 		Mockito.when(priceServicePort.getPriceById(PRICEID)).thenReturn(PRICEDTO);
 		
+		Mockito.when(priceServicePort.addPrice(PRICEDTO)).thenReturn(PRICEDTO);
+		
 	}
 	
 	@Test
 	public void getPriceByIdTEst() {
 		ResponseEntity<PriceDto> responseCtrl = priceController.getPriceById(PRICEID);
 		assertEquals(responseCtrl.getBody(), PRICEDTO); 
+	}
+
+	
+	@Test
+	public void DiletePriceByIdTEst() {
+		ResponseEntity<String> delete = priceController.deletePrice(PRICEID);
+		assertEquals(delete.getBody(), DELETE);
+	}
+	
+	@Test
+	public void savedPriceTEst() {
+		ResponseEntity<PriceDto> delete = priceController.addPrice(PRICEDTO);
+		assertEquals(delete.getBody(), PRICEDTO);
 	}
 	
 	private Date castStringToDAte(String dateInString) {		
